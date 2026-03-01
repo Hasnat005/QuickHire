@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import ApplyForm from '../components/ApplyForm'
 import JobDetailSkeleton from '../components/JobDetailSkeleton'
 import { useJobDetail } from '../hooks/useJobDetail'
 import { usePageTitle } from '../hooks/usePageTitle'
@@ -54,13 +55,9 @@ function JobDetailPage() {
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
         <h2 className="text-2xl font-bold text-[#243251]">Job Description</h2>
         <p className="mt-4 whitespace-pre-line text-base leading-8 text-slate-600">{job.description}</p>
-
-        <div className="mt-8">
-          <button className="rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700">
-            Apply Now
-          </button>
-        </div>
       </section>
+
+      <ApplyForm jobId={job.id} />
     </div>
   )
 }
