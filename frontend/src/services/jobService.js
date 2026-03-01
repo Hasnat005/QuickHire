@@ -9,3 +9,13 @@ export const getJobs = async () => {
 
   return response.data.data ?? []
 }
+
+export const getJobById = async (jobId) => {
+  const response = await apiClient.get(`/jobs/${jobId}`)
+
+  if (!response?.data?.success) {
+    throw new Error('Failed to fetch job details')
+  }
+
+  return response.data.data
+}

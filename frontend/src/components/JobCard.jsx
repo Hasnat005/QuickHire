@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const categoryStyleMap = {
   design: 'bg-emerald-50 text-emerald-600',
   engineering: 'bg-indigo-50 text-indigo-600',
@@ -18,7 +20,10 @@ function JobCard({ job }) {
     job.description?.length > 120 ? `${job.description.slice(0, 120).trim()}...` : job.description
 
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <Link
+      to={`/jobs/${job.id}`}
+      className="block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-2xl font-semibold tracking-tight text-slate-800">{job.title}</h3>
@@ -40,7 +45,7 @@ function JobCard({ job }) {
         </span>
         <span className="rounded-full bg-indigo-50 px-3 py-1 text-sm font-semibold text-indigo-600">Remote Friendly</span>
       </div>
-    </article>
+    </Link>
   )
 }
 
