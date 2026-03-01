@@ -19,6 +19,9 @@ function MainLayout() {
             <NavLink to="/jobs" className={navLinkClass}>
               Find Jobs
             </NavLink>
+            <NavLink to="/admin" className={navLinkClass}>
+              Admin
+            </NavLink>
           </nav>
 
           <div className="hidden items-center gap-4 md:flex">

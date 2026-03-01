@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
+import AdminPage from './pages/AdminPage'
 import JobDetailPage from './pages/JobDetailPage'
 import JobListingsPage from './pages/JobListingsPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -11,6 +12,7 @@ function App() {
         <Route index element={<Navigate to="/jobs" replace />} />
         <Route path="jobs" element={<JobListingsPage />} />
         <Route path="jobs/:id" element={<JobDetailPage />} />
+        <Route path="admin" element={<AdminPage />} />
       </Route>
       <Route path="/404" element={<NotFoundPage />} />
       <Route path="*" element={<Navigate to="/404" replace />} />

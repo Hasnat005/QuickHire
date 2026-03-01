@@ -19,3 +19,23 @@ export const getJobById = async (jobId) => {
 
   return response.data.data
 }
+
+export const createJob = async (payload) => {
+  const response = await apiClient.post('/jobs', payload)
+
+  if (!response?.data?.success) {
+    throw new Error('Failed to create job')
+  }
+
+  return response.data.data
+}
+
+export const deleteJob = async (jobId) => {
+  const response = await apiClient.delete(`/jobs/${jobId}`)
+
+  if (!response?.data?.success) {
+    throw new Error('Failed to delete job')
+  }
+
+  return response.data.data
+}
