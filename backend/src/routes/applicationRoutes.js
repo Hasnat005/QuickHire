@@ -6,7 +6,7 @@ import { validateRequest } from '../middlewares/validateRequest.js';
 const router = Router();
 
 router.post(
-  '/applications',
+  '/',
   [
     body('job_id').trim().notEmpty().withMessage('job_id is required').isUUID().withMessage('job_id must be a valid uuid'),
     body('name').trim().notEmpty().withMessage('name is required'),

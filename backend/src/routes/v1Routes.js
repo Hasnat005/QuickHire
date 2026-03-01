@@ -6,7 +6,7 @@ import applicationRoutes from './applicationRoutes.js';
 const router = Router();
 
 router.use('/', healthRoutes);
-router.use('/', jobRoutes);
-router.use('/', applicationRoutes);
+router.use('/jobs', jobRoutes);
+router.use('/applications', applicationRoutes);
 
 export default router;

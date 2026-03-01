@@ -5,12 +5,12 @@ import { validateRequest } from '../middlewares/validateRequest.js';
 
 const router = Router();
 
-router.get('/jobs', getJobs);
+router.get('/', getJobs);
 
-router.get('/jobs/:id', [param('id').isUUID().withMessage('Invalid job id')], validateRequest, getJob);
+router.get('/:id', [param('id').isUUID().withMessage('Invalid job id')], validateRequest, getJob);
 
 router.post(
-  '/jobs',
+  '/',
   [
     body('title').trim().notEmpty().withMessage('title is required'),
     body('company').trim().notEmpty().withMessage('company is required'),
@@ -23,7 +23,7 @@ router.post(
 );
 
 router.delete(
-  '/jobs/:id',
+  '/:id',
   [param('id').isUUID().withMessage('Invalid job id')],
   validateRequest,
   deleteJob,
