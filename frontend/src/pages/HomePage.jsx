@@ -7,6 +7,7 @@ import teslaLogo from '../../assets/company_logo/tesla.png'
 import vodaponeLogo from '../../assets/company_logo/vodapone.png'
 import backgroundBlue from '../../assets/bg/background_blue.png'
 import dashboardImage from '../../assets/bg/dashboard.png'
+import companyLogo from '../../assets/bg/logo.png'
 import {
   ArrowRight,
   BarChart3,
@@ -526,10 +527,7 @@ function HomePage() {
           <div className="grid gap-10 [grid-template-columns:repeat(1,minmax(0,1fr))] md:[grid-template-columns:repeat(2,minmax(0,1fr))] lg:[grid-template-columns:repeat(4,minmax(0,1fr))] lg:gap-12">
             <div>
               <div className="flex items-center gap-3">
-                <div className="relative h-10 w-10 rounded-full bg-[#4f46e5]">
-                  <span className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-white" />
-                  <span className="absolute left-[21px] top-[19px] h-[6px] w-[6px] rounded-full bg-white" />
-                </div>
+                <img src={companyLogo} alt="QuickHire logo" className="h-11 w-11 object-contain" />
                 <span className="text-4xl font-bold leading-none tracking-tight">QuickHire</span>
               </div>
 
