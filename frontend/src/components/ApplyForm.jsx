@@ -93,7 +93,7 @@ function ApplyForm({ jobId }) {
       setSuccessMessage('Application submitted successfully. We will contact you soon.')
       setFormValues(initialFormState)
       setFieldErrors({})
-    } catch (_error) {
+    } catch {
       setSubmitError('Unable to submit application right now. Please try again.')
     } finally {
       setIsSubmitting(false)

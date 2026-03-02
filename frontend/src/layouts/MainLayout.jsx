@@ -1,38 +1,48 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 
 const navLinkClass = ({ isActive }) =>
-  `text-sm font-medium transition-colors ${isActive ? 'text-indigo-600' : 'text-slate-600 hover:text-slate-900'}`
+  `text-lg font-semibold leading-none transition-colors ${isActive ? 'text-[#5f6b82]' : 'text-[#5f6b82] hover:text-[#2f3b56]'}`
 
 function MainLayout() {
+  const location = useLocation()
+  const isLandingPage = location.pathname === '/'
+  const mainClassName = isLandingPage
+    ? 'w-full py-0'
+    : 'mx-auto w-full max-w-[1536px] px-6 py-8 md:px-8 md:py-10 lg:px-10'
+
   return (
     <div className="min-h-screen bg-[#f4f5fb] text-slate-900">
-      <header className="border-b border-slate-200/70 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600 text-white">
-              Q
+      <header className="bg-[#f4f5fb]">
+        <div className="mx-auto flex w-full max-w-[1536px] items-center justify-between px-6 py-4 md:px-8 lg:px-10">
+          <div className="flex items-center gap-12">
+            <div className="flex items-center gap-3">
+              <div className="relative h-10 w-10 rounded-full bg-[#4f46e5]">
+                <span className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-white" />
+                <span className="absolute left-[21px] top-[19px] h-[6px] w-[6px] rounded-full bg-white" />
+              </div>
+              <span className="text-2xl font-bold leading-none tracking-tight text-[#243251]">QuickHire</span>
             </div>
-            <span className="text-2xl font-bold tracking-tight text-slate-800">QuickHire</span>
+
+            <nav className="hidden items-center gap-10 md:flex">
+              <NavLink to="/jobs" className={navLinkClass}>
+                Find Jobs
+              </NavLink>
+              <NavLink to="/companies" className={navLinkClass}>
+                Browse Companies
+              </NavLink>
+            </nav>
           </div>
 
-          <nav className="hidden items-center gap-8 md:flex">
-            <NavLink to="/jobs" className={navLinkClass}>
-              Find Jobs
-            </NavLink>
-            <NavLink to="/admin" className={navLinkClass}>
-              Admin
-            </NavLink>
-          </nav>
-
-          <div className="hidden items-center gap-4 md:flex">
-            <button className="text-sm font-semibold text-indigo-600">Login</button>
-            <button className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white">
+          <div className="hidden items-center md:flex">
+            <button className="px-8 text-lg font-semibold leading-none text-[#4f46e5]">Login</button>
+            <div className="h-12 w-px bg-[#d6d9e4]" />
+            <button className="ml-4 h-14 bg-[#4f46e5] px-9 text-lg font-semibold leading-none text-white">
               Sign Up
             </button>
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-6 py-8 md:py-10">
+      <main className={mainClassName}>
         <Outlet />
       </main>
     </div>

@@ -37,7 +37,7 @@ function AdminPage() {
       const data = await getJobs()
       setJobs(data)
       setFetchError('')
-    } catch (_error) {
+    } catch {
       setFetchError('Unable to load jobs. Please refresh and try again.')
     } finally {
       setLoading(false)
@@ -113,7 +113,7 @@ function AdminPage() {
       setFormValues(initialFormValues)
       setFieldErrors({})
       setFormMessage('Job created successfully.')
-    } catch (_error) {
+    } catch {
       setFormError('Unable to create job. Please try again.')
     } finally {
       setSubmitting(false)
@@ -125,7 +125,7 @@ function AdminPage() {
       setDeletingId(jobId)
       await deleteJob(jobId)
       setJobs((currentJobs) => currentJobs.filter((job) => job.id !== jobId))
-    } catch (_error) {
+    } catch {
       setFormError('Unable to delete job right now. Please try again.')
     } finally {
       setDeletingId('')

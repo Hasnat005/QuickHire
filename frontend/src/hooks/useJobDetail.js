@@ -23,7 +23,7 @@ export const useJobDetail = (jobId) => {
           setJob(data)
           setError('')
         }
-      } catch (_error) {
+      } catch {
         if (isMounted) {
           setError('We could not load this job right now. Please try again.')
         }

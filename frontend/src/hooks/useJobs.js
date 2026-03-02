@@ -17,7 +17,7 @@ export const useJobs = () => {
           setJobs(data)
           setError('')
         }
-      } catch (_error) {
+      } catch {
         if (isMounted) {
           setError('Unable to load jobs right now. Please try again shortly.')
         }
