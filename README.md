@@ -37,3 +37,23 @@ npm run dev
 Backend health check endpoint:
 
 `GET /api/health`
+
+## Supabase DB Setup (Required)
+
+This project requires these tables in Supabase:
+
+- `public.users`
+- `public.jobs`
+- `public.applications`
+
+Run the SQL in:
+
+`backend/supabase/setup_core_tables.sql`
+
+Then restart the backend and retry:
+
+- `POST /api/v1/auth/signup`
+- `POST /api/v1/auth/login`
+- `POST /api/v1/jobs`
+- `GET /api/v1/jobs`
+- `POST /api/v1/applications`

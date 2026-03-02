@@ -8,10 +8,11 @@ export const env = {
   corsOrigin: process.env.CORS_ORIGIN || '*',
   supabaseUrl: process.env.SUPABASE_URL,
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+  jwtSecret: process.env.JWT_SECRET,
 };
 
 export const validateServerEnv = () => {
-  const requiredVariables = ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY'];
+  const requiredVariables = ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'JWT_SECRET'];
   const missingVariables = requiredVariables.filter((variableName) => !process.env[variableName]);
 
   if (missingVariables.length > 0) {

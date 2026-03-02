@@ -19,9 +19,13 @@ export const runSupabaseOperation = async (operation, context = 'Supabase operat
     const result = await operation(supabase);
 
     if (result?.error) {
+      const { code, message, hint, details } = result.error;
+      const detailParts = [message, hint, details].filter(Boolean);
+      const detailMessage = detailParts.length > 0 ? ` ${detailParts.join(' | ')}` : '';
+
       throw new AppError(
-        `${context} failed due to a Supabase connection or configuration issue.`,
-        503,
+        `${context} failed.${detailMessage}`,
+        code === 'PGRST205' ? 500 : 503,
       );
     }
 
