@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import heroImage from '../../assets/image.png'
 import patternImage from '../../assets/pattern.jpeg'
 import amdLogo from '../../assets/company_logo/amd.png'
@@ -27,7 +28,7 @@ import {
   Users,
   Wallet,
 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const companyLogos = [
   { src: vodaponeLogo, alt: 'Vodafone' },
@@ -215,6 +216,29 @@ const latestJobsOpen = [
 ]
 
 function HomePage() {
+  const navigate = useNavigate()
+  const [heroKeyword, setHeroKeyword] = useState('')
+  const [heroLocation, setHeroLocation] = useState('all')
+
+  const handleHeroSearch = (event) => {
+    event.preventDefault()
+
+    const params = new URLSearchParams()
+
+    if (heroKeyword.trim()) {
+      params.set('q', heroKeyword.trim())
+    }
+
+    if (heroLocation !== 'all') {
+      params.set('location', heroLocation)
+    }
+
+    navigate({
+      pathname: '/jobs',
+      search: params.toString() ? `?${params.toString()}` : '',
+    })
+  }
+
   return (
     <>
       <div className="mx-auto w-full max-w-[1536px] px-6 md:px-8 lg:px-10">
@@ -245,13 +269,18 @@ function HomePage() {
               Great platform for the job seeker that searching for new career heights and passionate about startups.
             </p>
 
-            <div className="mt-8 grid gap-0 border border-[#dbe0ec] bg-white md:grid-cols-[1.22fr_1fr_auto] md:items-center">
+            <form
+              onSubmit={handleHeroSearch}
+              className="mt-8 grid gap-0 border border-[#dbe0ec] bg-white md:grid-cols-[1.22fr_1fr_auto] md:items-center"
+            >
               <div className="flex h-[90px] items-center gap-4 px-8">
                 <Search className="h-8 w-8 shrink-0 text-[#2f3b56]" strokeWidth={2} />
                 <div className="w-full">
                   <input
                     type="text"
                     placeholder="Job title or keyword"
+                    value={heroKeyword}
+                    onChange={(event) => setHeroKeyword(event.target.value)}
                     className="w-full border-none bg-transparent pb-4 text-base text-[#4d5975] outline-none placeholder:text-[#b0b7c4]"
                   />
                   <div className="h-px w-full bg-[#d7ddea]" />
@@ -262,10 +291,15 @@ function HomePage() {
                 <MapPin className="h-8 w-8 shrink-0 text-[#2f3b56]" strokeWidth={2} />
                 <div className="w-full">
                   <div className="relative">
-                    <select className="w-full appearance-none border-none bg-transparent pb-4 pr-10 text-base text-[#3f4d68] outline-none">
-                      <option>Florence, Italy</option>
-                      <option>Berlin, Germany</option>
-                      <option>Paris, France</option>
+                    <select
+                      value={heroLocation}
+                      onChange={(event) => setHeroLocation(event.target.value)}
+                      className="w-full appearance-none border-none bg-transparent pb-4 pr-10 text-base text-[#3f4d68] outline-none"
+                    >
+                      <option value="all">All locations</option>
+                      <option value="Florence, Italy">Florence, Italy</option>
+                      <option value="Berlin, Germany">Berlin, Germany</option>
+                      <option value="Paris, France">Paris, France</option>
                     </select>
                     <ChevronDown className="pointer-events-none absolute right-0 top-0.5 h-6 w-6 text-[#7f889b]" />
                   </div>
@@ -273,10 +307,13 @@ function HomePage() {
                 </div>
               </div>
 
-              <button className="h-[90px] bg-indigo-600 px-12 text-base font-bold text-white transition hover:bg-indigo-700">
+              <button
+                type="submit"
+                className="h-[90px] bg-indigo-600 px-12 text-base font-bold text-white transition hover:bg-indigo-700"
+              >
                 Search my job
               </button>
-            </div>
+            </form>
 
             <p className="mt-5 text-sm text-[#6f788b]">
               Popular : UI Designer, UX Researcher, Android, Admin
@@ -384,9 +421,12 @@ function HomePage() {
                 Start posting jobs for only $10.
               </p>
 
-              <button className="mt-5 h-16 bg-white px-10 text-xl font-bold text-indigo-600 transition hover:bg-indigo-50 md:mt-10 md:h-15 md:px-12 md:text-base">
+              <Link
+                to="/admin/signup"
+                className="mt-5 inline-flex h-16 items-center bg-white px-10 text-xl font-bold text-indigo-600 transition hover:bg-indigo-50 md:mt-10 md:h-15 md:px-12 md:text-base"
+              >
                 Sign Up For Free
-              </button>
+              </Link>
             </div>
 
             <div className="relative hidden justify-end lg:flex">

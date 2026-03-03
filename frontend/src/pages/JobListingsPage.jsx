@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import EmptyState from '../components/EmptyState'
 import JobCard from '../components/JobCard'
 import JobCardSkeleton from '../components/JobCardSkeleton'
@@ -10,10 +11,17 @@ const normalizeText = (value) => (value || '').toLowerCase().trim()
 function JobListingsPage() {
   usePageTitle('Job Listings')
 
+  const [searchParams] = useSearchParams()
   const { jobs, loading, error } = useJobs()
-  const [searchText, setSearchText] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
-  const [selectedLocation, setSelectedLocation] = useState('all')
+  const [searchText, setSearchText] = useState(() => searchParams.get('q') || '')
+  const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || 'all')
+  const [selectedLocation, setSelectedLocation] = useState(() => searchParams.get('location') || 'all')
+
+  useEffect(() => {
+    setSearchText(searchParams.get('q') || '')
+    setSelectedCategory(searchParams.get('category') || 'all')
+    setSelectedLocation(searchParams.get('location') || 'all')
+  }, [searchParams])
 
   const categoryOptions = useMemo(() => {
     const categories = jobs.map((job) => job.category).filter(Boolean)
